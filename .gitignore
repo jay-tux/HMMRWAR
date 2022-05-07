@@ -1,0 +1,7 @@
+.spl-file-templates
+build/*
+meta/rundocker.zsh
+meta/verslag.*
+
+!meta/verslag.tex
+!meta/verslag.pdf

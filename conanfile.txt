@@ -1,0 +1,6 @@
+[requires]
+cxxopts/3.0.0
+seqan/2.4.0
+
+[generators]
+cmake
