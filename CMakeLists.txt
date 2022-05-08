@@ -5,7 +5,9 @@ project(HMMRWAR
   DESCRIPTION "HMMRWAR: A HMMRATAC implementation in C++"
 )
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME}
+  src/main.cpp src/argparser.cpp
+)
 
 include(FetchContent)
 FetchContent_Declare(stoch
@@ -19,7 +21,7 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -std=c++17")
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 target_include_directories(${PROJECT_NAME} PUBLIC inc/)

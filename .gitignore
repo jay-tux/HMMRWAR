@@ -1,7 +1,9 @@
 .spl-file-templates
+.cache/*
 build/*
 meta/rundocker.zsh
 meta/verslag.*
+compile_commands.json
 
 !meta/verslag.tex
 !meta/verslag.pdf
