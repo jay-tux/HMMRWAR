@@ -11,12 +11,12 @@
 #include <utility>
 
 #include "argparser.hpp"
-#include "decompose/genome_reader.hpp"
+#include "io/genome_reader.hpp"
 
 int main(int argc, const char **argv) {
   using hmmrwar::parser;
   using hmmrwar::argdata;
-  using hmmrwar::decompose::genome_reader;
+  using hmmrwar::io::genome_reader;
 
   // step 1: parse cli arguments
   parser p;

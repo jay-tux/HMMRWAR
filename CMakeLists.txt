@@ -7,7 +7,7 @@ project(HMMRWAR
 
 add_executable(${PROJECT_NAME}
   src/main.cpp src/argparser.cpp
-  src/decompose/genome_reader.cpp
+  src/io/genome_reader.cpp
 )
 
 include(FetchContent)

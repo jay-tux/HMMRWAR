@@ -10,11 +10,11 @@
 #include <string>
 #include <sstream>
 
-#include "decompose/genome_reader.hpp"
+#include "io/genome_reader.hpp"
 
-using hmmrwar::decompose::genome_record;
-using hmmrwar::decompose::genome_iterator;
-using hmmrwar::decompose::genome_reader;
+using hmmrwar::io::genome_record;
+using hmmrwar::io::genome_iterator;
+using hmmrwar::io::genome_reader;
 
 genome_iterator::genome_iterator(std::ifstream &stream) :
   data{stream}, set{false}, next{} {}

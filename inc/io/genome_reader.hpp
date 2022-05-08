@@ -16,7 +16,7 @@
 #include <vector>
 #include <fstream>
 
-namespace hmmrwar::decompose {
+namespace hmmrwar::io {
 struct genome_error : std::exception {
   explicit genome_error(std::string what) : str{what} {}
   inline const char *what() const noexcept override { return str.c_str(); }
@@ -57,15 +57,15 @@ private:
   std::ifstream datastream;
 };
 
-} // namespace hmmrwar::decompose
+} // namespace hmmrwar::io
 
 bool operator==(
-  const hmmrwar::decompose::genome_iterator &it,
-  const hmmrwar::decompose::genome_reader::genome_end &);
+  const hmmrwar::io::genome_iterator &it,
+  const hmmrwar::io::genome_reader::genome_end &);
 
 inline bool operator!=(
-  const hmmrwar::decompose::genome_iterator &it,
-  const hmmrwar::decompose::genome_reader::genome_end &end)
+  const hmmrwar::io::genome_iterator &it,
+  const hmmrwar::io::genome_reader::genome_end &end)
 {
     return !(it == end);
 }
