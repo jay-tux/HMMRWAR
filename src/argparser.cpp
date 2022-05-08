@@ -92,32 +92,36 @@ parser::result parser::operator()(int argc, const char **argv) {
     (result.count(key) > 0) \
     ? std::optional{result[key].as<std::string>()} \
     : std::nullopt;
+  #define or_default(key, T, default) \
+    (result.count(key) > 0) ? result[key].as<T>() : default
 
   std::string bamfile = result["bam"].as<std::string>();
   std::string indexfile = result["index"].as<std::string>();
   std::string genome = result["genome"].as<std::string>();
 
-  const std::vector<double> &means = result["means"].as<std::vector<double>>();
-  const std::vector<double> &stddev = result["stddev"].as<std::vector<double>>();
-  bool frag_em = result["frag_em"].as<bool>();
-  int min_map_qual = result["minmapq"].as<int>();
-  int upper_fold = result["upper"].as<int>();
-  int lower_fold = result["lower"].as<int>();
-  int zscore = result["zscore"].as<int>();
-  std::string prefix = result["output"].as<std::string>();
+  using dvec = std::vector<double>;
+
+  dvec means = or_default("means", dvec, dvec({50, 200, 400, 600}));
+  dvec stddev = or_default("stddev", dvec, dvec({20,20,20,20}));
+  bool frag_em = or_default("frag_em", bool, true);
+  int min_map_qual = or_default("minmapq", int, 30);
+  int upper_fold = or_default("upper", int, 20);
+  int lower_fold = or_default("lower", int, 10);
+  int zscore = or_default("zscore", int, 100);
+  std::string prefix = or_default("output", std::string, "NA");
   optstring blacklist = optional_string("blacklist");
-  bool report_peaks = result["peaks"].as<bool>();
-  int kmean_count = result["kmeans"].as<int>();
+  bool report_peaks = or_default("peaks", bool, true);
+  int kmean_count = or_default("kmeans", int, 3);
   optstring train_regions = optional_string("training");
-  bool bedgraph = result["bedgraph"].as<bool>();
-  int min_peak_len = result["minlen"].as<int>();
-  std::string score_sys = result["score"].as<std::string>();
-  bool bg_score = result["bgscore"].as<bool>();
-  int trim_signals = result["trim"].as<int>();
-  int window_vit = result["window"].as<int>();
+  bool bedgraph = or_default("bedgraph", bool, false);
+  int min_peak_len = or_default("minlen", int, 200);
+  std::string score_sys = or_default("score", std::string, "max");
+  bool bg_score = or_default("bgscore", bool, false);
+  int trim_signals = or_default("trim", int, 0);
+  int window_vit = or_default("window", int, 25000000);
   optstring model = optional_string("model");
-  bool model_only = result["modelonly"].as<bool>();
-  int max_train_region = result["maxTrain"].as<int>();
+  bool model_only = or_default("modelonly", bool, false);
+  int max_train_region = or_default("maxTrain", int, 1000);
 
   return argdata{
     bamfile, indexfile, genome,

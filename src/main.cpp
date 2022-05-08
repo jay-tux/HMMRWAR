@@ -9,23 +9,26 @@
 
 #include <iostream>
 #include <utility>
+
 #include "argparser.hpp"
+#include "decompose/genome_reader.hpp"
 
 int main(int argc, const char **argv) {
   using hmmrwar::parser;
   using hmmrwar::argdata;
+  using hmmrwar::decompose::genome_reader;
 
   // step 1: parse cli arguments
   parser p;
   parser::result pre_args;
-  try {
+  // try {
     pre_args = p(argc, argv);
-  }
-  catch(std::exception &e) {
-    p.write_help(std::cerr);
-    std::cerr << std::endl << e.what() << std::endl;
-    return -1;
-  }
+  // }
+  // catch(std::exception &e) {
+  //   p.write_help(std::cerr);
+  //   std::cerr << std::endl << e.what() << std::endl;
+  //   return -1;
+  // }
 
   if(p.is_help(std::move(pre_args))) {
     p.write_help(std::cout);
