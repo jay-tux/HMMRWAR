@@ -7,6 +7,9 @@
 // Licence:     MPL
 /////////////////////////////////////////////////////////////////////////////
 
+#ifndef _HMMRWAR_ARGPARSER_H
+#define _HMMRWAR_ARGPARSER_H
+
 #include <variant>
 #include <vector>
 #include <string>
@@ -17,7 +20,7 @@
 
 #include "cxxopts.hpp"
 
-namespace hmmwar {
+namespace hmmrwar {
 struct invalid_argument_error : std::exception {
   explicit invalid_argument_error(std::string msg) : msg{msg} {}
   inline const char *what() const noexcept override { return msg.c_str(); }
@@ -56,4 +59,6 @@ private:
   strvc mandatory;
   strtostrvc limited_values;
 };
-} // namespace hmmwar
+} // namespace hmmrwar
+
+#endif

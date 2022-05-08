@@ -29,9 +29,9 @@
 #define ONE_OF(param, ...) limited_values[param] = {__VA_ARGS__};
 #define MANDATORY(...) mandatory = {__VA_ARGS__};
 
-using hmmwar::parser;
-using hmmwar::invalid_argument_error;
-using hmmwar::argdata;
+using hmmrwar::parser;
+using hmmrwar::invalid_argument_error;
+using hmmrwar::argdata;
 
 parser::parser() : source{cxxopts::Options("HMMWAR", "HMMRATAC in C++")},
   arg_files{strvc()}, mandatory{strvc()}, limited_values{strtostrvc()}

@@ -12,8 +12,8 @@
 #include "argparser.hpp"
 
 int main(int argc, const char **argv) {
-  using hmmwar::parser;
-  using hmmwar::argdata;
+  using hmmrwar::parser;
+  using hmmrwar::argdata;
 
   // step 1: parse cli arguments
   parser p;
