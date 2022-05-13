@@ -1,17 +1,7 @@
 #!/usr/bin/zsh
 
 p=$PWD
+scriptdir=`realpath $0 | rev | cut -d'/' -f2- | rev`
 
-if [[ $1 = "--no-recompile" ]]; then
-  mkdir -f ../build
-  cd ../build
-  conan install ..
-  cmake ..
-  cmake --build .
-else
-  cd ../build
-  shift 1
-fi
-
-./HMMRWAR $@
-cd "$PWD"
+cd "$scriptdir/../" && ./build.sh && build/HMMRWAR $@
+cd "$p"

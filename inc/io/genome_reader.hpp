@@ -7,8 +7,8 @@
 // Licence:     MPL
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _HMMRWAR_DECOMPOSE_GENOME_READER
-#define _HMMRWAR_DECOMPOSE_GENOME_READER
+#ifndef _HMMRWAR_IO_GENOME_READER
+#define _HMMRWAR_IO_GENOME_READER
 
 #include <optional>
 #include <string>

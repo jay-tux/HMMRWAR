@@ -12,6 +12,7 @@
 
 #include "argparser.hpp"
 #include "io/genome_reader.hpp"
+#include "io/bam_reader.hpp"
 
 int main(int argc, const char **argv) {
   using hmmrwar::parser;
@@ -21,14 +22,14 @@ int main(int argc, const char **argv) {
   // step 1: parse cli arguments
   parser p;
   parser::result pre_args;
-  // try {
+  try {
     pre_args = p(argc, argv);
-  // }
-  // catch(std::exception &e) {
-  //   p.write_help(std::cerr);
-  //   std::cerr << std::endl << e.what() << std::endl;
-  //   return -1;
-  // }
+  }
+  catch(std::exception &e) {
+    p.write_help(std::cerr);
+    std::cerr << std::endl << e.what() << std::endl;
+    return -1;
+  }
 
   if(p.is_help(std::move(pre_args))) {
     p.write_help(std::cout);
@@ -37,6 +38,7 @@ int main(int argc, const char **argv) {
 
   argdata args(p.as_data(std::move(pre_args)));
 
+  hmmrwar::io::read_bam(args.bamfile);
   // step 2: signal decomposition (optionally via og hmmratac)
   // step 3: model training using Baum-Welch (priority1)
   // step 4: genome annotation

@@ -1,0 +1,81 @@
+\documentclass[twoside,twocolumn]{article}
+
+\usepackage{blindtext} % Package to generate dummy text throughout this template
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[dutch]{babel} % Language hyphenation and typographical rules
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{Fox News $\bullet$ Maart 2022} % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+\usepackage{titling} % Customizing the title section
+\usepackage{graphicx} % for graphics
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{HMMRWAR} % Article title
+\author{\textsc{Sys Jonas} (\normalsize Universiteit Gent, \normalsize \href{mailto:Jonas.Sys@UGent.be}{Jonas.Sys@UGent.be})
+}
+\date{\today} % Leave empty to omit a date
+\renewcommand{\maketitlehookd}{%
+\begin{abstract}
+Bij het gebruik van de tool HMMRATAC blijkt de implementatie niet perfect te zijn. HMMRWAR probeert deze fouten te elimineren en een vervanger te zijn voor (een groot deel) van de tool. Een tweede voordeel aan de HMMRWAR implementatie is de snelheid en effici\"entie: C++ is notoir sneller en heeft een veel kleinere geheugenoverhead.
+\end{abstract}
+}
+
+\begin{document}
+\maketitle
+
+\section{HMMRATAC}
+
+De tool HMMRATAC werkt in drie grote fasen: eerst wordt een vlugge screening van de data gehouden. Deze fase gebruikt expectimax op de lengte van de reads (deze worden gezien als een discreet signaal). Dit "signaal" wordt gedecomposeerd in vier onderdelen. Hieruit wordt in de tweede fase een HMM met 3 staten gegenereerd. Het grootste deel van fase 2 is het trainen van het model. Dit is nu ook de grootste bottleneck. In de laatste fase wordt de data geannotteerd door middel van het Viterbi-algoritme.
+
+\section{Implementatieplan}
+Aangezien fase 1 nu al volledig en correct ge\"implementeerd is, kunnen we de implementatie in de huidige HMMRATAC tool gebruiken. Hiervoor wordt de source code een klein beetje aangepast.
+
+De effectieve focus zal liggen op fasen 2 en 3 (als er nog tijd over is, kan fase 1 ook nog geschreven worden). De programmeertaal voor deze implementatie is C++20 (voornamelijk door dependencies); met de toolstack Conan/CMake. Aangezien het niet nuttig is om het wiel opnieuw uit te vinden, worden libraries gebruikt:
+\begin{itemize}
+  \item \verb|cxxopts| is een CLI-argument parsing library;
+  \item \verb|stochHMM| is een C++ implementatie van een HMM (inclusief Baum-Welch training);
+  \item \verb|fpgen| is een C++20 implementatie van generators en manipulators voor generators;
+  \item \verb|seqan3| is een I/O library voor biologische data.
+\end{itemize}
+
+\section{Huidige status}
+Het project is opgezet en de CLI-argumenten kunnen geparst worden. Deze kunnen gespecifieerd worden door de macros; zie het bestand \verb|meta/arguments.meta|.
+
+\end{document}

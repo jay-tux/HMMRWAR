@@ -4,6 +4,8 @@ build/*
 meta/rundocker.zsh
 meta/verslag.*
 compile_commands.json
+seqan3/*
+TestData/*
 
 !meta/verslag.tex
 !meta/verslag.pdf
